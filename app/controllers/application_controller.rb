@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
   before_filter :require_http_auth  if Rails.env.production?
 
   def require_http_auth
-    authenticate_or_request_with_http_basic do |username, password|
-      username == "tone" && password == "musictshirts1"
+    authenticate_or_request_with_http_basic("Authentication") do |name, password|
+      name == 'tone' && password == 'musictshirts1'
     end
   end
 
