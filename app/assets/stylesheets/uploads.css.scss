@@ -384,6 +384,14 @@ footer{
   font-family: 'ubuntu', sans-serif;
 }
 
+.shirt-title-caption {
+  margin-left: 41px;
+  position: absolute;
+  top: 42px;
+  font-size: small;
+  color: rgb(171, 175, 175);
+}
+
 @media only screen and (max-width: 580px)  {
   .half{
     width:100% !important;
