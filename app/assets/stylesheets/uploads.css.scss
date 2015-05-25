@@ -297,6 +297,7 @@ input{
   margin-bottom:25px;
   border: 0px;
   border: 1px solid #c3dbe0;
+  font-family: 'ubuntu', sans-serif;
   &.half-input{
     width:34%;
     margin-left:3%
@@ -370,6 +371,18 @@ footer{
   }
 }
 
+::-webkit-input-placeholder {
+  font-family: 'ubuntu', sans-serif;
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-family: 'ubuntu', sans-serif;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+  font-family: 'ubuntu', sans-serif;
+}
+:-ms-input-placeholder {
+  font-family: 'ubuntu', sans-serif;
+}
 
 @media only screen and (max-width: 580px)  {
   .half{
