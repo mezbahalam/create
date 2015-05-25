@@ -121,7 +121,8 @@
     },
     handleSubmit: function(e){
       e.preventDefault();
-      var regx = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+      var regx_email = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+      var regx_url =  /^[a-zA-Z0-9-_s]*$/;
       if(this.state.numberValid
         && this.state.cvcValid
         && this.state.yearValid
@@ -155,10 +156,13 @@
         if( this.state.bandcampUrl == ''){
           this.setState({bandUrlValid:false})
         }
+        if( !regx_url.test(this.state.bandcampUrl)){
+          this.setState({bandUrlValid:false})
+        }
         if( this.state.email == ''){
           this.setState({emailValid:false})
         }
-        if(!regx.test(this.state.email)){
+        if(!regx_email.test(this.state.email)){
           this.setState({emailValid:false})
         }
         if( this.state.fullName == ''){
@@ -171,8 +175,6 @@
         if( this.state.image == null){
           this.setState({imageValid:false})
         }
-
-
       }
 
     },
