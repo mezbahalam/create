@@ -336,7 +336,7 @@
             <input type="hidden" name="color" value={this.state.color}/>
             <input type="hidden" name="stripeToken" value={this.state.stripeToken} />
             <input type="text" className={shirtNameClass} name="shirt_name" placeholder="T-Shirt Title" onChange={this.handleTyping} ref="shirtName" id="shirtName" value={this.state.shirtName}/>
-            <div className="shirt-title-caption"><sup>Please use the same t-shirt title that you will be using on Bandcamp</sup></div>
+            <div className="shirt-title-caption"><sup>Give your shirt the same title that you will be using on Bandcamp</sup></div>
             <input type="text" className={bandNameClass} name="band_name" placeholder="Artist / Band Name" onChange={this.handleTyping} ref="name" id="name" value={this.state.bandName}/>
             <input type="text" className={bandUrlClass+" halfplus-input"} name="bancamp_url" placeholder="Bandcamp URL" onChange={this.handleTyping} id="url" value={this.state.bandcampUrl} /> <span className="bigg">.bandcamp.com</span>
             <input type="text" className={emailClass} name="email" placeholder="Email" onChange={this.handleTyping} id="email" value={this.state.email} />

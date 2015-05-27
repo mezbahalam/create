@@ -1,9 +1,10 @@
+@charset 'UTF-8';
+@import url('https://fonts.googleapis.com/css?family=Open Sans:light,lightitalic,normal,italic,bold,bolditalic|Ubuntu:light,lightitalic,normal,italic,bold,bolditalic|Open+Sans:light,lightitalic,normal,italic,bold,bolditalic');
+
 $turkoise: #40a7c5;
 $blackish: #292929;
 
-@import url('https://fonts.googleapis.com/css?family=Open Sans:light,lightitalic,normal,italic,bold,bolditalic|Ubuntu:light,lightitalic,normal,italic,bold,bolditalic|Open+Sans:light,lightitalic,normal,italic,bold,bolditalic');
-
-body{
+body, input{
   color:$blackish;
   margin:0;
   padding:0;
@@ -192,16 +193,19 @@ body{
       display:block;
     }
   }
-  .buttons{
-    width:100%;
-    position:absolute;
-    bottom:60px;
-    right:0;
-    left:0;
-    &.after-upload{
-      margin-top:95px !important;
-    }
 
+  @media only screen and (max-width: 1180px)  {
+    .buttons{
+      width:100%;
+      position:absolute;
+      bottom:60px;
+      right:0;
+      left:0;
+      height: auto;
+      &.after-upload{
+        margin-top:95px !important;
+      }
+    }
   }
   button.color{
     border:1px solid #d3d3d3;
@@ -297,7 +301,7 @@ input{
   margin-bottom:25px;
   border: 0px;
   border: 1px solid #c3dbe0;
-  font-family: 'ubuntu', sans-serif;
+  //font-family: 'ubuntu', sans-serif;
   &.half-input{
     width:34%;
     margin-left:3%
@@ -388,8 +392,7 @@ footer{
   margin-left: 41px;
   position: absolute;
   top: 42px;
-  font-size: small;
-  color: rgb(171, 175, 175);
+  font-size: 15px;
 }
 
 @media only screen and (max-width: 580px)  {
