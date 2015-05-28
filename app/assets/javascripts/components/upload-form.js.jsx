@@ -132,7 +132,10 @@
         && this.state.email != ''
         && this.state.fullName != ''
         && this.state.shirtName != ''
-        && this.state.image != null){
+        && this.state.image != null
+        && regx_title.test(this.state.shirtName)
+        && regx_email.test(this.state.email)
+        && regx_url.test(this.state.bandcampUrl)){
         this.props.onSubmit(true);
         Stripe.card.createToken({
           number: React.findDOMNode(this.refs.cc_number).value.trim(),
