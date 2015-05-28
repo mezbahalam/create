@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :authenticate_with_http_basic_authentication if Rails.env.production?
 
+  def require_http_auth
+    authenticate_or_request_with_http_basic do |username, password|
+      username == "tone" && password == "musictshirts1"
+    end
+  end
+
   private
 
  	def authenticate_with_http_basic_authentication

@@ -123,6 +123,7 @@
       e.preventDefault();
       var regx_email = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
       var regx_url =  /^[a-zA-Z0-9-_s]*$/;
+      var regx_title =  /^[a-zA-Z0-9 _-_s]*$/;
       if(this.state.numberValid
         && this.state.cvcValid
         && this.state.yearValid
@@ -171,7 +172,9 @@
         if( this.state.shirtName == ''){
           this.setState({shirtNameValid:false})
         }
-
+        if(!regx_title.test(this.state.shirtName)){
+          this.setState({shirtNameValid:false})
+        }
         if( this.state.image == null){
           this.setState({imageValid:false})
         }
