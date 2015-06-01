@@ -273,6 +273,7 @@
       var fullNameClass='';
       var cardDiv;
       var shirtNameClass='';
+      var divStyle = {display: "none"};
       if(state.numberValid == false){
         numberClass = "invalid"
       }
@@ -287,6 +288,9 @@
       }
       if(state.bandUrlValid == false){
         bandUrlClass = "invalid"
+        $(".invalid-text-url").show()
+      }else{
+        $(".invalid-text-url").hide();
       }
       if(state.emailValid == false){
         emailClass = "invalid"
@@ -296,8 +300,10 @@
       }
       if(state.shirtNameValid == false){
         shirtNameClass = "invalid"
+        $(".invalid-text-title").show()
+      }else{
+        $(".invalid-text-title").hide();
       }
-
 
       if(state.numberValid == false){
         numberClass = "invalid"
@@ -341,10 +347,12 @@
             <input type="hidden" name="inches" value={this.state.inches}/>
             <input type="hidden" name="color" value={this.state.color}/>
             <input type="hidden" name="stripeToken" value={this.state.stripeToken} />
+            <div className="invalid-text-title" style={divStyle}><sup>Only letters, numbers, dashes & spaces</sup></div>
             <input type="text" className={shirtNameClass} name="shirt_name" placeholder="T-Shirt Title" onChange={this.handleTyping} ref="shirtName" id="shirtName" value={this.state.shirtName}/>
             <div className="shirt-title-caption"><sup>Give your shirt the same title that you will be using on Bandcamp</sup></div>
             <input type="text" className={bandNameClass} name="band_name" placeholder="Artist / Band Name" onChange={this.handleTyping} ref="name" id="name" value={this.state.bandName}/>
             <input type="text" className={bandUrlClass+" halfplus-input"} name="bancamp_url" placeholder="Bandcamp URL" onChange={this.handleTyping} id="url" value={this.state.bandcampUrl} /> <span className="bigg">.bandcamp.com</span>
+            <div className="invalid-text-url" style={divStyle}><sup>Only letters, numbers & dashes. No https://</sup></div>
             <input type="text" className={emailClass} name="email" placeholder="Email" onChange={this.handleTyping} id="email" value={this.state.email} />
             <hr/>
             <input type="text"  className={fullNameClass} name="full_name" placeholder="Full Name" ref="full_name" value={this.state.fullName}  id="fullName" onChange={this.handleTyping}/>
