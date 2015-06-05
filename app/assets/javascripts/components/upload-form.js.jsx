@@ -129,6 +129,7 @@
         $("#cvc").attr("disabled", true)
         $("#ccn").hide();
         $(".eighty").hide();
+        $('#paypal-caption-info').show();
       } else {
         $("#email").attr("placeholder", "Email");
         $("#cc").prop("disabled", false);
@@ -136,6 +137,7 @@
         $("#cvc").attr("disabled", false)
         $("#ccn").show();
         $(".eighty").show();
+        $('#paypal-caption-info').hide();
       }
     },
     handleClickCC: function(e){
@@ -418,6 +420,8 @@
             </div>
             <input type="text" className={emailClass} name="email" placeholder="Email" onChange={this.handleTyping} id="email" value={this.state.email} />
             <input type="text"  className={fullNameClass} name="full_name" placeholder="Full Name" ref="full_name" value={this.state.fullName}  id="fullName" onChange={this.handleTyping}/>
+            <div id="paypal-caption-info" className="caption-info" style={divStyle}>
+              <p>When you sell a shirt on Bandcamp, you will receive a PayPal invoice from us. This must be paid in order for us to process the order.</p></div>
             <input type="text" placeholder="Credit Card Number" ref="cc_number" className={numberClass} onBlur={this.validateCard} id="ccn" value={this.state.ccNumber} onChange={this.handleTyping}/>
             {cardDiv}
             <div className="eighty">
