@@ -95,6 +95,8 @@
       month:'',
       year:'',
       cvc:'',
+      cc:'',
+      paypal:'',
       stripeToken:null,
       numberValid:null,
       cvcValid:null,
@@ -119,12 +121,49 @@
     handleColorChange: function(color){
       this.setState({color:color})
     },
+    handleClickPP: function(e){
+      if ($("#paypal").is(":checked")) {
+        $("#cc").prop({ disabled: true, checked: false });
+        $("#email").attr("placeholder", "Paypal Email");
+        $("#ccn").attr("disabled", true)
+        $("#cvc").attr("disabled", true)
+        $("#ccn").hide();
+        $(".eighty").hide();
+      } else {
+        $("#email").attr("placeholder", "Email");
+        $("#cc").prop("disabled", false);
+        $("#ccn").attr("disabled", false)
+        $("#cvc").attr("disabled", false)
+        $("#ccn").show();
+        $(".eighty").show();
+      }
+    },
+    handleClickCC: function(e){
+      if ($("#cc").is(":checked")) {
+        $("#paypal").prop({ disabled: true, checked: false });
+        $("#cc  ").val();
+      } else {
+        $("#paypal").prop("disabled", false);
+      }
+    },
     handleSubmit: function(e){
       e.preventDefault();
       var regx_email = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
       var regx_url =  /^[a-zA-Z0-9-_s]*$/;
       var regx_title =  /^[a-zA-Z0-9 _-_s]*$/;
-      if(this.state.numberValid
+      if($("#ccn").prop("disabled")
+        && $("#cvc").prop("disabled")
+        && this.state.bandName != ''
+        && this.state.bandcampUrl != ''
+        && this.state.email != ''
+        && this.state.fullName != ''
+        && this.state.shirtName != ''
+        && this.state.image != null
+        && regx_title.test(this.state.shirtName)
+        && regx_email.test(this.state.email)
+        && regx_url.test(this.state.bandcampUrl)){
+        React.findDOMNode(this.refs.form).submit();
+      }else if(this.state.numberValid
         && this.state.cvcValid
         && this.state.yearValid
         && this.state.bandName != ''
@@ -239,6 +278,19 @@
           this.setState({ccNumber:value})
         }
       }
+      else if(e.target.id == "paypal"){
+        if($("#payment").is(":checked")){
+          this.setState({ccNumber:value, numberValid:true})
+          this.setState({year:value, yearValid:true})
+          this.setState({cvc:value,  cvcValid:true})
+          $('.card-type').hide();
+        }else{
+          this.setState({ccNumber:value, numberValid:false})
+          this.setState({year:value, yearValid:false})
+          this.setState({cvc:value,  cvcValid:false})
+          $('.card-type').show();
+        }
+      }
       else if (e.target.id == "month"){
         if (isNaN(value) )
           return false;
@@ -274,6 +326,7 @@
       var cardDiv;
       var shirtNameClass='';
       var divStyle = {display: "none"};
+      var divStyleEmail = {display: "none"};
       if(state.numberValid == false){
         numberClass = "invalid"
       }
@@ -347,14 +400,23 @@
             <input type="hidden" name="inches" value={this.state.inches}/>
             <input type="hidden" name="color" value={this.state.color}/>
             <input type="hidden" name="stripeToken" value={this.state.stripeToken} />
-            <div className="invalid-text-title" style={divStyle}><sup>Only letters, numbers, dashes & spaces</sup></div>
             <input type="text" className={shirtNameClass} name="shirt_name" placeholder="T-Shirt Title" onChange={this.handleTyping} ref="shirtName" id="shirtName" value={this.state.shirtName}/>
-            <div className="shirt-title-caption"><sup>Give your shirt the same title that you will be using on Bandcamp</sup></div>
+            <div className="invalid-text-title" style={divStyle}><sup>Only letters, numbers, dashes & spaces</sup></div>
             <input type="text" className={bandNameClass} name="band_name" placeholder="Artist / Band Name" onChange={this.handleTyping} ref="name" id="name" value={this.state.bandName}/>
             <input type="text" className={bandUrlClass+" halfplus-input"} name="bancamp_url" placeholder="Bandcamp URL" onChange={this.handleTyping} id="url" value={this.state.bandcampUrl} /> <span className="bigg">.bandcamp.com</span>
             <div className="invalid-text-url" style={divStyle}><sup>Only letters, numbers & dashes. No https://</sup></div>
+            <div>
+              <ul className="payment-method">
+                <li className="control-inline"><label className="payment-header">Payment Method</label></li>
+                <li className="label-controll-inline control-inline">
+                  <input className="payment-selection" onClick= { this.handleClickCC } id="cc" type="checkbox" name="cc" /><label for="credit card">Creadit Card</label>
+                </li>
+                <li className="control-inline">
+                  <input className="payment-selection" onChange={this.handleTyping} onClick= { this.handleClickPP } id="paypal" type="checkbox" name="paypal" /><label for="paypal">Paypal</label>
+                </li>
+              </ul>
+            </div>
             <input type="text" className={emailClass} name="email" placeholder="Email" onChange={this.handleTyping} id="email" value={this.state.email} />
-            <hr/>
             <input type="text"  className={fullNameClass} name="full_name" placeholder="Full Name" ref="full_name" value={this.state.fullName}  id="fullName" onChange={this.handleTyping}/>
             <input type="text" placeholder="Credit Card Number" ref="cc_number" className={numberClass} onBlur={this.validateCard} id="ccn" value={this.state.ccNumber} onChange={this.handleTyping}/>
             {cardDiv}
@@ -401,5 +463,5 @@
   $(document).ready(function(){
     Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
     React.render(<FormWrapper />,document.getElementById('container'));
-
+    $("#cc").prop({ disabled: false, checked: true });
   })

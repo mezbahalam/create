@@ -1,7 +1,9 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <div class="index">
-  <h1>Shirt uploads</h1>
+  <h1><span class="label label-success">Shirt uploads</span></h1>
 
-  <table>
+  <table class="table table-condensed">
     <thead>
       <tr>
         <th>email</th>
@@ -11,7 +13,10 @@
         <th>inches</th>
         <th>bane name</th>
         <th>bandcamp url</th>
-        <th>stripe_customer_id</th>
+        <th>payment</th>
+        <th></th>
+        <th></th>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -28,11 +33,10 @@
           <td><%= upload.shirt_inches_from_top %></td>
           <td><%= upload.band_name %></td>
           <td><%= upload.bancamp_url %></td>
-          <td><%= upload.stripe_customer_id %></td>
+          <td><%= payment_method(upload) %></td>
           <td><%= link_to "white", upload.cloud_1200_mockup %></td>
           <td><%= link_to "dark", upload.cloud_1200_dark %></td>
           <td><%= link_to "light", upload.cloud_1200_light %></td>
-
           <td><%= link_to "medium mockup", upload.cloud_small_mockup %></td>
           <td><%= link_to "large mockup", upload.cloud_big_mockup %></td>
           <td><%= link_to "full source", upload.cloud_big %></td>

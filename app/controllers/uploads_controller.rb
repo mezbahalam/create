@@ -27,7 +27,6 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-    puts params[:image]
     cloudinary = Cloudinary::Uploader.upload(params[:image])
     @upload = Upload.new
     @upload.cloudinary_code = cloudinary["public_id"]
@@ -42,19 +41,20 @@ class UploadsController < ApplicationController
     @upload.user_email = params[:email]
     @upload.user_fullname = params[:full_name]
 
+    if params[:cc] == "on"
+      Stripe.api_key = ENV['SECRET_KEY']
+
+      # Get the credit card details submitted by the form
+      token = params[:stripeToken]
+      # Create a Customer
+      customer = Stripe::Customer.create(
+        :source => token,
+        :description => params[:email]
+      )
+      @upload.stripe_customer_id = customer.id
+    end
 
 
-    Stripe.api_key = ENV['SECRET_KEY']
-
-    # Get the credit card details submitted by the form
-    token = params[:stripeToken]
-
-    # Create a Customer
-    customer = Stripe::Customer.create(
-      :source => token,
-      :description => params[:email]
-    )
-    @upload.stripe_customer_id = customer.id
     respond_to do |format|
       if @upload.save
         GeneralMailer.email(params[:email],

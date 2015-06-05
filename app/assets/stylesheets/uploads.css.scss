@@ -330,8 +330,8 @@ input{
   color: #ff003f;
   font-size: 15px;
   position: absolute;
-  top: -14px;
-  margin-left: 38px;
+  top: 41px;
+  margin-left: 40px;
 }
 
 .invalid-text-url{
@@ -403,9 +403,26 @@ footer{
   font-family: 'ubuntu', sans-serif;
 }
 
-.shirt-title-caption {
-  margin-left: 41px;
+.payment-method{
+  list-style-type: none;
+}
+
+.label-controll-inline{
+  margin-left: 115px;
+}
+
+.control-inline{
+  display: inline;
+  input{
+    width: 10%;
+    margin:auto;
+    padding:4px;
+  }
+}
+
+.payment-header{
+  font-size: 26px;
   position: absolute;
-  top: 42px;
-  font-size: 15px;
+  top: 205px;
+  left: 40px;
 }
